@@ -1,0 +1,119 @@
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  max-width: 100%;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+#top-header{
+  display: flex;
+  justify-content: space-between;
+  background-color: aqua;
+}
+.siteName a{
+  color: black;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+#tools a{
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+}
+nav{
+  background-color: blue;
+  margin: 2rem 0;
+}
+nav ul{
+  background-color: brown;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+}
+nav ul li{
+  background-color: darkgoldenrod;
+  list-style-type: none;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+main{
+  background-color: darkgreen;
+  padding: 1rem;
+}
+h1{
+  margin-bottom: 2rem;
+}
+.section-1{
+  display: flex;
+  margin-bottom: 2rem;
+}
+.delorean-prop{
+  background-color: darksalmon;
+  position: absolute;
+  height: 27vh;
+}
+.delorean-prop h3{
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+.delorean-prop p{
+  padding: 0.3rem 0;
+  font-size: 1.2rem;
+}
+.delorean-prop h4{
+  background-color: blue;
+  padding: 1rem;
+  max-width: 80%;
+}
+
+.delorean-car{
+  width: 100vw;
+}
+.section-2 div h3{
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.section-2 div ul li{
+  background-color: indigo;
+  margin-bottom: 1rem;
+}
+.section-3 div h3{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.upgrades{
+  display: grid;
+  grid-template-areas: 
+  "flux flux flux flame flame flame"
+  "bumper bumper bumper hub hub hub";
+  align-items: center;
+  gap: 1rem;
+}
+.upgrade-1{
+  grid-area: flux;
+  
+}
+.upgrades img{
+  background-color: blue;
+  width: auto;
+  border: 6px solid black;
+  padding: 2rem;
+  object-fit: fill;
+}
+.upgrade-2{
+  grid-area: flame;
+}
+.upgrade-3{
+  grid-area: bumper;
+}
+.ugrade-4{
+  grid-area: hub;
+}

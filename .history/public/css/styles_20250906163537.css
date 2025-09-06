@@ -1,0 +1,11 @@
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+#top-header{
+  display: flex;
+  justify-content: space-around;
+}

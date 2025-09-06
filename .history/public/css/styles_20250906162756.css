@@ -1,0 +1,7 @@
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  background-color: black;
+}

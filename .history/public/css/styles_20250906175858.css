@@ -1,0 +1,78 @@
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+#top-header{
+  display: flex;
+  justify-content: space-between;
+  background-color: aqua;
+}
+.siteName a{
+  color: black;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+#tools a{
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+}
+nav{
+  background-color: blue;
+  margin: 2rem 0;
+}
+nav ul{
+  background-color: brown;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+}
+nav ul li{
+  background-color: darkgoldenrod;
+  list-style-type: none;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+main{
+  background-color: darkgreen;
+  padding: 1rem;
+}
+h1{
+  margin-bottom: 2rem;
+}
+.section-1{
+  display: flex;
+  margin-bottom: 2rem;
+}
+.delorean-prop{
+  background-color: darksalmon;
+  position: absolute;
+  height: 27vh;
+}
+.delorean-prop h3{
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+.delorean-prop p{
+  padding: 0.3rem 0;
+  font-size: 1.2rem;
+}
+.delorean-prop h4{
+  background-color: blue;
+  padding: 0.5rem;
+  max-width: 80%;
+}
+
+.delorean-car{
+  width: 100vw;
+}

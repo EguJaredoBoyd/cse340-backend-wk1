@@ -1,0 +1,15 @@
+@media screen and (min-width: 800px) {
+    main{
+        grid-template-areas: ;
+    }
+    .section-1{
+        grid-area: section-one;
+    }
+    .section-2{
+        grid-area: section-two;
+    }
+    .section-3{
+        grid-area: section-three;
+    }
+    
+}

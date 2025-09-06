@@ -1,0 +1,46 @@
+@media screen and (min-width: 800px) {
+    .main-view{
+        display: grid;
+        grid-template-areas: 
+        "section-one section-one section-one section-one section-one section-one"
+        "section-three section-three section-three section-two section-two section-two";
+    }
+    .section-1{
+        grid-area: section-one;
+    }
+    .section-2{
+        grid-area: section-two;
+    }
+    .section-3{
+        grid-area: section-three;
+    }
+    .delorean-prop{
+        max-width: 50%;
+        height: 60%;
+        left: 5rem;
+        top: 25rem;
+    }
+    .delorean-prop h3{
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    .delorean-prop p{
+        font-size: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    .delorean-prop h4{
+        font-size: 1.7rem;
+        margin-bottom: 0;
+    }
+    .upgrades{
+        justify-content: start;
+    }
+    .section-2{
+        display: grid;
+        justify-content: end;
+    }
+    .section-2 p{
+        margin-bottom: 3.1rem;
+    }
+    
+}
