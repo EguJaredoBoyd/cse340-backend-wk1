@@ -42,4 +42,6 @@ app.listen(port, () => {
 })
 
 //index route
-app.get("/", baseController.buildHome)
+app.get("/", function(req, res){
+  res.render("index", {title: "Home"})
+})
