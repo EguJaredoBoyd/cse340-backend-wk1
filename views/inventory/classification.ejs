@@ -1,0 +1,11 @@
+<%# The heading of the view content %>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%# messages() %>
+
+<%- grid %>
