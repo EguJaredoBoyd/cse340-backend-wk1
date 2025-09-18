@@ -49,3 +49,5 @@ invCont.buildByInvId = async function (req, res, next) {
 }
 
 module.exports = invCont
+
+  module.exports = invCont

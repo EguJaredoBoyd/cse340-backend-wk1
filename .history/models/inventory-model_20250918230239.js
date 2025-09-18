@@ -38,4 +38,4 @@ async function getInventoryById(inv_id) {
   )
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryById};
+module.exports = {getClassifications, getInventoryByClassificationId};

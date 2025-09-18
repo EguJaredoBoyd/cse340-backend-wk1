@@ -1,7 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 
-
 const invCont = {}
 
 /* ***************************
@@ -20,27 +19,22 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
-/* ***************************
- *  Build vehicle detail view
- *  Example URL: /inv/detail/5
- * ************************** */
-invCont.buildByInvId = async function (req, res, next) {
+// 🚗 NEW controller for vehicle details
+async function buildByInvId(req, res, next) {
   try {
     const invId = req.params.inv_id // grab id from URL
     const data = await invModel.getInventoryById(invId)
 
-    // check if no vehicle found
     if (!data || !data.rows || data.rows.length === 0) {
       return next({ status: 404, message: "Vehicle not found." })
     }
 
-    const vehicle = data.rows[0] // one single car
+    const vehicle = data.rows[0] // just one car
     const vehicleDetailHtml = await utilities.buildVehicleDetail(vehicle)
-    const nav = await utilities.getNav()
 
-    res.render("./inventory/detail", {
+    res.render("inventory/detail", {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
-      nav,
+      nav: await utilities.getNav(),
       vehicleDetail: vehicleDetailHtml,
     })
   } catch (err) {
@@ -48,4 +42,5 @@ invCont.buildByInvId = async function (req, res, next) {
   }
 }
 
-module.exports = invCont
+
+  module.exports = invCont
