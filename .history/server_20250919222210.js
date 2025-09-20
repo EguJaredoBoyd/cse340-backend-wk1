@@ -44,23 +44,6 @@ app.use(async (req, res, next) => {
 * Express Error Handler
 * Place after all other middleware
 *************************/
-// 404 handler (Not Found)
-app.use((req, res, next) => {
-  res.status(404).render("errors/error", {
-    title: "Page Not Found",
-    message: "Sorry, the page you are looking for does not exist."
-  })
-})
-
-// 500 handler (Server Errors)
-app.use((err, req, res, next) => {
-  console.error("🚨 ERROR:", err.message)
-  res.status(500).render("errors/error", {
-    title: "Server Error",
-    message: "Something went wrong on the server. Please try again later."
-  })
-})
-
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)

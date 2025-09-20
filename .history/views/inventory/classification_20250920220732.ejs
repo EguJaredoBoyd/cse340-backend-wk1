@@ -1,0 +1,30 @@
+<%# The heading of the view content %>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%# messages() %>
+<section class="classification-page">
+  <div class="classification-grid">
+    <%- grid %>
+  </div><div class="main-view">
+  <% if (title) { %>
+    <h1><%= title %></h1>
+  <% } else { %>
+    <h1>Vehicle Classification</h1>
+  <% } %>
+
+  <section class="section-2">
+    <div>
+      <h3>Available Vehicles</h3>
+    </div>
+    <div class="classification-grid">
+      <%- grid %>
+    </div>
+  </section>
+</div>
+
+</section>
