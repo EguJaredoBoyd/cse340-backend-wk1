@@ -17,8 +17,6 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/") // points to utilities/index.js
 const errorRoute = require("./routes/errorRoute")
 const accountRoute = require("./routes/accountRoute")
-const bodyParser = require("body-parser")
-
 
 
 
@@ -42,9 +40,6 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
 
 
 

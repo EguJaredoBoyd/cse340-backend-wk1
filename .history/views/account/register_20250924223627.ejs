@@ -1,0 +1,46 @@
+<%- include('../partials/head', {title: title}) %>
+
+<main>
+  <h1><%= title %></h1>
+
+  <!-- Flash message (if any) -->
+  <% if (messages && messages.length > 0) { %>
+    <div class="flash-message">
+      <% messages.forEach(function(message){ %>
+        <p><%= message %></p>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form action="/account/register" method="post" class="account-form">
+    <label for="account_firstname">First Name</label>
+    <input type="text" id="account_firstname" name="account_firstname"
+      value="<%= typeof locals.account_firstname !== 'undefined' ? locals.account_firstname : '' %>" required>
+
+    <label for="account_lastname">Last Name</label>
+    <input type="text" id="account_lastname" name="account_lastname"
+      value="<%= typeof locals.account_lastname !== 'undefined' ? locals.account_lastname : '' %>" required>
+
+    <label for="account_email">Email Address</label>
+    <input type="email" id="account_email" name="account_email"
+      value="<%= typeof locals.account_email !== 'undefined' ? locals.account_email : '' %>" required>
+
+    <label for="account_password">Password</label>
+    <input type="password" id="account_password" name="account_password" required
+      minlength="12"
+      pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{12,}$"
+      title="Must be at least 12 characters, include 1 uppercase letter, 1 number, and 1 special character">
+
+    <!-- Toggle password visibility -->
+    <button type="button" onclick="togglePassword()">Show/Hide Password</button>
+
+    <button type="submit">Register</button>
+  </form>
+</main>
+
+<script>
+function togglePassword() {
+  const pwdField = document.getElementById("account_password");
+  pwdField.type = pwdField.type === "password" ? "text" : "password";
+}
+</script>
