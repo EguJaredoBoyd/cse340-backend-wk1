@@ -18,32 +18,5 @@ router.get("/",
   utilities.handleErrors(invController.buildManagementView)
 )
 
-// Add Classification View
-router.get("/add-classification", 
-  utilities.handleErrors(invController.buildAddClassification)
-)
-
-// Process Add Classification
-router.post("/add-classification", 
-  utilities.handleErrors(invController.addClassification)
-)
-
-// ===============================
-// Add Vehicle Routes
-// ===============================
-
-// Show the Add Vehicle form
-router.get(
-  "/add-vehicle",
-  utilities.handleErrors(invController.buildAddVehicle)
-)
-
-// Process Add Vehicle form submission
-router.post(
-  "/add-vehicle",
-  utilities.handleErrors(invController.addVehicle)
-)
-
-
 
 module.exports = router;

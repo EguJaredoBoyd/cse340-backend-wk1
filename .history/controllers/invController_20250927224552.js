@@ -214,6 +214,12 @@ invCont.addVehicle = async function (req, res, next) {
   }
 }
 
+// controllers/invController.js
+const invModel = require("../models/inventory-model")
+const utilities = require("../utilities/")
+
+const invCont = {}
+
 /* ***************************
  *  Build inventory by classification view
  * ************************** */

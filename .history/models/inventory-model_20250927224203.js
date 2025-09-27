@@ -50,6 +50,7 @@ async function addClassification(classification_name) {
   }
 }
 
+const pool = require("../database/")
 
 /* *****************************
 *  Add New Vehicle

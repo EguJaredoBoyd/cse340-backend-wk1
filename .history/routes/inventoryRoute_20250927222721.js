@@ -28,22 +28,6 @@ router.post("/add-classification",
   utilities.handleErrors(invController.addClassification)
 )
 
-// ===============================
-// Add Vehicle Routes
-// ===============================
-
-// Show the Add Vehicle form
-router.get(
-  "/add-vehicle",
-  utilities.handleErrors(invController.buildAddVehicle)
-)
-
-// Process Add Vehicle form submission
-router.post(
-  "/add-vehicle",
-  utilities.handleErrors(invController.addVehicle)
-)
-
 
 
 module.exports = router;
