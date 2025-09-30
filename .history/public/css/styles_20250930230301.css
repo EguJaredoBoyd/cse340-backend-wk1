@@ -29,8 +29,7 @@ html{
 }
 nav{
   margin: 2rem 0;
-  width: 100%;
-
+  max-width: 100%;
 }
 nav ul{
   background-color: rgb(18, 48, 56);

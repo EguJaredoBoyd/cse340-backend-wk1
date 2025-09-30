@@ -9,9 +9,17 @@
   <main class="form-container">
     <h1><%= title %></h1>
 
-   <!-- Flash messages -->
-   <%- messages() %>
-
+   <% if (messages && Array.isArray(messages) && messages.length > 0) { %>
+      <ul class="flash-messages">
+        <% messages.forEach(function(message){ %>
+          <li><%= message %></li>
+        <% }) %>
+      </ul>
+   <% } else if (messages) { %>
+      <ul class="flash-messages">
+        <li><%= messages %></li>
+      </ul>
+    <% } %>
 
 
     <!-- Login form -->

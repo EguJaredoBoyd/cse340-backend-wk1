@@ -1,11 +1,16 @@
-<%- include('../partials/head', {title: title}) %>
+
 
 <main>
   <h1><%= title %></h1>
 
   <!-- Flash messages -->
-  <%- messages() %>
-
+    <% if (messages && messages.length > 0) { %>
+      <ul class="flash-messages">
+        <% messages.forEach(function(message){ %>
+          <li><%= message %></li>
+        <% }) %>
+      </ul>
+    <% } %>
 
 
   <form action="/account/register" method="post" class="account-form">

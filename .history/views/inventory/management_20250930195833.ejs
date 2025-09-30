@@ -5,7 +5,13 @@
 <h1>Account Management</h1>
 
 <!-- Flash messages -->
-<%- messages() %>
+<% if (messages && messages.length > 0) { %>
+  <ul class="flash-messages">
+    <% messages.forEach(function(message){ %>
+      <li><%= message %></li>
+    <% }) %>
+  </ul>
+<% } %>
 
 <p>You're logged in ✅</p>
 

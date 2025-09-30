@@ -12,7 +12,7 @@ async function buildLogin(req, res, next) {
       title: "Login",
       nav,
       errors: null,
-      // ❌ remove messages: req.flash("notice")
+      messages: req.flash("notice")
     })
   } catch (err) {
     next(err)
@@ -27,7 +27,7 @@ async function buildRegister(req, res, next) {
       title: "Register",
       nav,
       errors: null,
-      // ❌ remove messages: req.flash("notice")
+      messages: req.flash("notice")
     })
   } catch (err) {
     next(err)
@@ -40,8 +40,10 @@ async function registerAccount(req, res, next) {
   const { account_firstname, account_lastname, account_email, account_password } = req.body
 
   try {
+    // ✅ Hash the password before saving
     const hashedPassword = await bcrypt.hash(account_password, 10)
 
+    // ✅ Save to the database with hashed password
     const regResult = await accountModel.registerAccount(
       account_firstname,
       account_lastname,
@@ -63,57 +65,45 @@ async function registerAccount(req, res, next) {
   }
 }
 
-/* Process login request */
+/* ****************************************
+ *  Process login request
+ * ************************************ */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
-
-  try {
-    const accountData = await accountModel.getAccountByEmail(account_email)
-    if (!accountData) {
-      req.flash("notice", "Please check your credentials and try again.")
-      return res.status(400).render("account/login", {
-        title: "Login",
-        nav,
-        errors: null,
-        account_email,
-      })
-    }
-
-    const validPassword = await bcrypt.compare(account_password, accountData.account_password)
-    if (!validPassword) {
-      req.flash("notice", "Please check your credentials and try again.")
-      return res.status(400).render("account/login", {
-        title: "Login",
-        nav,
-        errors: null,
-        account_email,
-      })
-    }
-
-    const payload = {
-      account_id: accountData.account_id,
-      account_firstname: accountData.account_firstname,
-      account_lastname: accountData.account_lastname,
-      account_email: accountData.account_email,
-      account_type: accountData.account_type,
-    }
-
-    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" })
-
-    res.cookie("jwt", accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 3600 * 1000,
+  const accountData = await accountModel.getAccountByEmail(account_email)
+  if (!accountData) {
+    req.flash("notice", "Please check your credentials and try again.")
+    res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      errors: null,
+      account_email,
     })
-
-    req.flash("notice", "You are logged in.")
-    res.redirect("/account/")
+    return
+  }
+  try {
+    if (await bcrypt.compare(account_password, accountData.account_password)) {
+      delete accountData.account_password
+      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      if(process.env.NODE_ENV === 'development') {
+        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+      } else {
+        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+      }
+      return res.redirect("/account/")
+    }
+    else {
+      req.flash("message notice", "Please check your credentials and try again.")
+      res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        account_email,
+      })
+    }
   } catch (error) {
-    console.error("Login error:", error)
-    req.flash("notice", "An error occurred. Please try again.")
-    res.redirect("/account/login")
+    throw new Error('Access Forbidden')
   }
 }
 
@@ -121,15 +111,16 @@ async function accountLogin(req, res) {
 async function buildAccountManagement(req, res, next) {
   try {
     let nav = await utilities.getNav()
-    res.render("inventory/management", {
+    res.render("account/management", {
       title: "Account Management",
       nav,
       errors: null,
-      // ❌ remove messages: req.flash("notice")
+      messages: req.flash("notice")
     })
   } catch (err) {
     next(err)
   }
 }
+
 
 module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }

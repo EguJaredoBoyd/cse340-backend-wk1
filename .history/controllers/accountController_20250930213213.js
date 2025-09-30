@@ -121,7 +121,7 @@ async function accountLogin(req, res) {
 async function buildAccountManagement(req, res, next) {
   try {
     let nav = await utilities.getNav()
-    res.render("inventory/management", {
+    res.render("account/management", {
       title: "Account Management",
       nav,
       errors: null,
