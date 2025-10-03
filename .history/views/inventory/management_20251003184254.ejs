@@ -2,6 +2,14 @@
 
 <%- include('../partials/head', {title: title}) %>
 
+<h1>Account Management</h1>
+
+<!-- Flash messages -->
+<%- messages() %>
+
+<p>You're logged in ✅</p>
+
+
 <main>
   <h1>Inventory Management</h1>
   <p>Choose an option below:</p>
@@ -13,9 +21,7 @@
 
   <h2>Manage Inventory</h2>
   <p>Use the drop-down menu to select a classification to see its vehicles.</p>
-  
   <%- classificationSelect %>
-
   <table id="inventoryDisplay"></table>
   <noscript>JavaScript must be enabled to use this page.</noscript>
 </main>

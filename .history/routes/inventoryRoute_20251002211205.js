@@ -44,7 +44,7 @@ router.post(
   utilities.handleErrors(invController.addVehicle)
 )
 
-router.get("/getInventory/:classificationId", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 
 

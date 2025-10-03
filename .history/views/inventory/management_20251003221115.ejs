@@ -13,8 +13,11 @@
 
   <h2>Manage Inventory</h2>
   <p>Use the drop-down menu to select a classification to see its vehicles.</p>
-  
-  <%- classificationSelect %>
+  <% if (typeof classificationSelect !== 'undefined' && classificationSelect) { %>
+    <%- classificationSelect %>
+  <% } else { %>
+    <p class="notice">No classifications available.</p>
+  <% } %>
 
   <table id="inventoryDisplay"></table>
   <noscript>JavaScript must be enabled to use this page.</noscript>

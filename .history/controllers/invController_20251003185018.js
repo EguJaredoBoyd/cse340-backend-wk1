@@ -65,17 +65,26 @@ invCont.buildByInvId = async function (req, res, next) {
 invCont.buildManagementView = async function (req, res, next) {
   try {
     let nav = await utilities.getNav()
-    const classificationSelect = await utilities.buildClassificationList()
-    res.render("./inventory/management", {
+    let classificationSelect = ""
+
+    try {
+      classificationSelect = await utilities.buildClassificationList()
+    } catch (err) {
+      console.error("Error building classification list:", err)
+    }
+
+    res.render("inventory/management", {
       title: "Inventory Management",
       nav,
-      classificationSelect,
+      classificationSelect, // always passed, even if ""
       errors: null,
+      messages: req.flash("notice")
     })
   } catch (err) {
     next(err)
   }
 }
+
 
 /* ***************************
  *  Build Add Classification View

@@ -71,6 +71,7 @@ invCont.buildManagementView = async function (req, res, next) {
       nav,
       classificationSelect,
       errors: null,
+      messages: req.flash("notice")
     })
   } catch (err) {
     next(err)

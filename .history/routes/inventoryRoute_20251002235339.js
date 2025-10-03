@@ -14,7 +14,7 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInvId))
 
 // Inventory Management View
-router.get("/", 
+router.get("/management", 
   utilities.handleErrors(invController.buildManagementView)
 )
 
@@ -44,7 +44,7 @@ router.post(
   utilities.handleErrors(invController.addVehicle)
 )
 
-router.get("/getInventory/:classificationId", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 
 

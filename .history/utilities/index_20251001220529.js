@@ -131,30 +131,6 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
- /* **************************************
-* Build classification select list
-* ************************************ */
-Util.buildClassificationList = async function (classification_id = null) {
-  try {
-    const data = await invModel.getClassifications()
-    let classificationList = '<select id="classificationList" name="classification_id">'
-    classificationList += '<option value="">Choose a Classification</option>'
-
-    data.rows.forEach((row) => {
-      classificationList += `<option value="${row.classification_id}" ${
-        classification_id == row.classification_id ? "selected" : ""
-      }>${row.classification_name}</option>`
-    })
-
-    classificationList += "</select>"
-    return classificationList
-  } catch (err) {
-    console.error("Error building classification list:", err)
-    return "<p>Error loading classifications</p>"
-  }
-}
-
-
 module.exports = Util
 
 

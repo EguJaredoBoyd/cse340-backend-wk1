@@ -125,6 +125,7 @@ async function buildAccountManagement(req, res, next) {
       title: "Account Management",
       nav,
       errors: null,
+      req.flash("notice")
       // ❌ remove messages: req.flash("notice")
     })
   } catch (err) {

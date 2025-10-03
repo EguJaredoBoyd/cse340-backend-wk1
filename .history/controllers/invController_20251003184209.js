@@ -64,13 +64,14 @@ invCont.buildByInvId = async function (req, res, next) {
  * ************************** */
 invCont.buildManagementView = async function (req, res, next) {
   try {
-    let nav = await utilities.getNav()
+    let nav = await utilities.getNav();
     const classificationSelect = await utilities.buildClassificationList()
     res.render("./inventory/management", {
       title: "Inventory Management",
       nav,
-      classificationSelect,
       errors: null,
+      messages: req.flash("notice"),
+      classificationSelect
     })
   } catch (err) {
     next(err)
