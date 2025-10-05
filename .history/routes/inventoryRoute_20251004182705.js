@@ -47,30 +47,6 @@ router.post(
 
 router.get("/getInventory/:classificationId", utilities.handleErrors(invController.getInventoryJSON))
 
-// Route to deliver the edit inventory view
-router.get(
-  "/edit/:inv_id",
-  utilities.handleErrors(invController.editInventoryView)
-);
-
-// Route to process the update inventory request
-router.post("/update/", utilities.handleErrors(invController.updateInventory))
-
-/* ***************************
- *  Route to get delete confirmation view
- * ************************** */
-router.get(
-  "/delete/:inv_id",
-  utilities.handleErrors(invController.buildDeleteView)
-)
-
-/* ***************************
- *  Route to delete the inventory item
- * ************************** */
-router.post(
-  "/delete/",
-  utilities.handleErrors(invController.deleteInventory)
-)
 
 
 

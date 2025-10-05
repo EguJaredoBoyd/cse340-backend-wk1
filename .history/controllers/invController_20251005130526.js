@@ -349,8 +349,7 @@ invCont.buildDeleteView = async function (req, res, next) {
       inv_model: item.inv_model,
       inv_year: item.inv_year,
       inv_price: item.inv_price,
-      classification_id: item.classification_id,
-      notice: req.flash("notice")
+      classification_id: item.classification_id
     })
   } catch (err) {
     next(err)
@@ -368,7 +367,7 @@ invCont.deleteInventory = async function (req, res, next) {
       return res.redirect("/inv/")
     }
 
-    const deleteResult = await invModel.deleteInventoryItem(inv_id)
+    const deleteResult = await invModel.deleteInventory(inv_id)
 
     // if model returns query result object, check rowCount; if boolean, accept true
     const ok =

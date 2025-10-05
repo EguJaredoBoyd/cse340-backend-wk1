@@ -349,8 +349,7 @@ invCont.buildDeleteView = async function (req, res, next) {
       inv_model: item.inv_model,
       inv_year: item.inv_year,
       inv_price: item.inv_price,
-      classification_id: item.classification_id,
-      notice: req.flash("notice")
+      classification_id: item.classification_id
     })
   } catch (err) {
     next(err)

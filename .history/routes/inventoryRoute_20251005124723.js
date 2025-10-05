@@ -69,7 +69,7 @@ router.get(
  * ************************** */
 router.post(
   "/delete/",
-  utilities.handleErrors(invController.deleteInventory)
+  utilities.handleErrors(invController.deleteItem)
 )
 
 
