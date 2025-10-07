@@ -227,24 +227,7 @@ async function updateAccount(req, res, next) {
   }
 }
 
-/* ****************************************
-*  Logout Process
-* *************************************** */
-async function logout(req, res) {
-  try {
-    // Clear the JWT cookie
-    res.clearCookie("jwt", { httpOnly: true, secure: true, sameSite: "strict" })
-
-    req.flash("notice", "You have successfully logged out.")
-    return res.redirect("/")
-  } catch (error) {
-    console.error("Logout error:", error)
-    req.flash("notice", "Error logging out. Please try again.")
-    return res.redirect("/account")
-  }
-}
 
 
 
-
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdateAccount, updateAccountInfo, updatePassword, updateAccount, logout }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdateAccount, updateAccountInfo, updatePassword, updateAccount }

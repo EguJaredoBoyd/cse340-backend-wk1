@@ -75,12 +75,11 @@ router.post(
 )
 
 // ------------------------------
-// LOGOUT ROUTE
+// LOGOUT ROUTE (optional)
 // ------------------------------
 router.get(
   "/logout",
-  utilities.handleErrors(accountController.logout)
+  utilities.handleErrors(accountController.logoutAccount)
 )
-
 
 module.exports = router

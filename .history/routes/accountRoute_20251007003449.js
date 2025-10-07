@@ -1,28 +1,22 @@
 // accountRoute.js
 
+// Required modules
 const express = require("express")
 const router = new express.Router()
-const utilities = require("../utilities/")
+const utilities = require("../utilities/") 
 const accountController = require("../controllers/accountController")
-const regValidate = require("../utilities/account-validation")
+const regValidate = require('../utilities/account-validation')
 
-// ------------------------------
-// ACCOUNT AUTH ROUTES
-// ------------------------------
-
-// Login view
+// Route to deliver login view
 router.get(
-  "/login",
+  "/login", 
   utilities.handleErrors(accountController.buildLogin)
 )
 
-// Register view
-router.get(
-  "/register",
-  utilities.handleErrors(accountController.buildRegister)
-)
+// Register route
+router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
-// Process registration
+// Process the registration data
 router.post(
   "/register",
   regValidate.registrationRules(),
@@ -30,7 +24,8 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process login
+// Process the login attempt
+// Process the login request
 router.post(
   "/login",
   regValidate.loginRules(),
@@ -38,18 +33,14 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 )
 
-// Account management view
+// Default route for account management view
 router.get(
   "/",
-  utilities.checkLogin,
+  utilities.checkLogin, 
   utilities.handleErrors(accountController.buildAccountManagement)
 )
 
-// ------------------------------
-// ACCOUNT UPDATE ROUTES (TASK 5)
-// ------------------------------
-
-// Deliver account update view
+// Update account view
 router.get(
   "/update/:account_id",
   utilities.checkLogin,
@@ -60,8 +51,6 @@ router.get(
 router.post(
   "/update-info",
   utilities.checkLogin,
-  regValidate.updateAccountRules(),
-  regValidate.checkAccountUpdateData,
   utilities.handleErrors(accountController.updateAccountInfo)
 )
 
@@ -69,18 +58,33 @@ router.post(
 router.post(
   "/update-password",
   utilities.checkLogin,
-  regValidate.passwordUpdateRules(),
-  regValidate.checkPasswordUpdateData,
   utilities.handleErrors(accountController.updatePassword)
 )
 
-// ------------------------------
-// LOGOUT ROUTE
-// ------------------------------
+// Deliver update view
 router.get(
-  "/logout",
-  utilities.handleErrors(accountController.logout)
+  "/update/:account_id",
+  utilities.checkLogin,
+  accountController.buildUpdateAccountView
+)
+
+// Process account update
+router.post(
+  "/update",
+  regValidate.accountUpdateRules(),
+  regValidate.checkAccountUpdateData,
+  accountController.updateAccount
+)
+
+// Process password update
+router.post(
+  "/update-password",
+  regValidate.passwordUpdateRules(),
+  regValidate.checkPasswordUpdateData,
+  accountController.updatePassword
 )
 
 
+
+// Export the router
 module.exports = router

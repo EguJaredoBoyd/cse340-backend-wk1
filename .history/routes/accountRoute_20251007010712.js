@@ -60,7 +60,7 @@ router.get(
 router.post(
   "/update-info",
   utilities.checkLogin,
-  regValidate.updateAccountRules(),
+  regValidate.accountUpdateRules(),
   regValidate.checkAccountUpdateData,
   utilities.handleErrors(accountController.updateAccountInfo)
 )
@@ -75,12 +75,11 @@ router.post(
 )
 
 // ------------------------------
-// LOGOUT ROUTE
+// LOGOUT ROUTE (optional)
 // ------------------------------
 router.get(
   "/logout",
-  utilities.handleErrors(accountController.logout)
+  utilities.handleErrors(accountController.logoutAccount)
 )
-
 
 module.exports = router

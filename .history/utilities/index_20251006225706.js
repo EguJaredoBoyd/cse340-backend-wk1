@@ -106,41 +106,23 @@ Util.checkJWTToken = (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET,
       function (err, accountData) {
         if (err) {
-          res.clearCookie("jwt");
-          req.flash("notice", "Session expired. Please log in again.");
-          return res.redirect("/account/login");
+          // Token invalid or expired
+          req.flash("notice", "Please log in")
+          res.clearCookie("jwt")
+          return res.redirect("/account/login")
         }
-        res.locals.accountData = accountData;
-        res.locals.loggedin = 1;
-        next();
+        // Token valid
+        res.locals.accountData = accountData
+        res.locals.loggedin = true
+        next()
       }
-    );
+    )
   } else {
-    next();
-  }
-};
-
-/* ****************************************
- * Middleware to check account type for inventory access
- **************************************** */
-Util.checkAccountType = (req, res, next) => {
-  // Make sure JWT exists and has been verified already
-  if (res.locals.loggedin && res.locals.accountData) {
-    const accountType = res.locals.accountData.account_type
-
-    // Allow only Employee or Admin
-    if (accountType === "Employee" || accountType === "Admin") {
-      return next()
-    } else {
-      req.flash("notice", "Access denied. You must be an employee or admin to view this page.")
-      return res.status(403).redirect("/account/login")
-    }
-  } else {
-    req.flash("notice", "Please log in first.")
-    return res.redirect("/account/login")
+    // No token present
+    res.locals.loggedin = false
+    next()
   }
 }
-
 
 
 /* ****************************************

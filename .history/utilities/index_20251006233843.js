@@ -100,25 +100,27 @@ Util.buildVehicleDetail = async function (vehicle) {
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
-  if (req.cookies.jwt) {
-    jwt.verify(
-      req.cookies.jwt,
-      process.env.ACCESS_TOKEN_SECRET,
-      function (err, accountData) {
-        if (err) {
-          res.clearCookie("jwt");
-          req.flash("notice", "Session expired. Please log in again.");
-          return res.redirect("/account/login");
-        }
-        res.locals.accountData = accountData;
-        res.locals.loggedin = 1;
-        next();
+  const token = req.cookies.jwt
+
+  if (token) {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+      if (err) {
+        // Token invalid or expired
+        res.clearCookie("jwt")
+        res.locals.loggedin = false
+        return next()
       }
-    );
+      // Token valid
+      res.locals.accountData = accountData
+      res.locals.loggedin = true
+      next()
+    })
   } else {
-    next();
+    // No token
+    res.locals.loggedin = false
+    next()
   }
-};
+}
 
 /* ****************************************
  * Middleware to check account type for inventory access

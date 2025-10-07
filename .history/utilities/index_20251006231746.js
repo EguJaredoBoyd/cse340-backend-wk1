@@ -120,27 +120,6 @@ Util.checkJWTToken = (req, res, next) => {
   }
 };
 
-/* ****************************************
- * Middleware to check account type for inventory access
- **************************************** */
-Util.checkAccountType = (req, res, next) => {
-  // Make sure JWT exists and has been verified already
-  if (res.locals.loggedin && res.locals.accountData) {
-    const accountType = res.locals.accountData.account_type
-
-    // Allow only Employee or Admin
-    if (accountType === "Employee" || accountType === "Admin") {
-      return next()
-    } else {
-      req.flash("notice", "Access denied. You must be an employee or admin to view this page.")
-      return res.status(403).redirect("/account/login")
-    }
-  } else {
-    req.flash("notice", "Please log in first.")
-    return res.redirect("/account/login")
-  }
-}
-
 
 
 /* ****************************************

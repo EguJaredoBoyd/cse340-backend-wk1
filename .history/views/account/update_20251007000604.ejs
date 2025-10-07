@@ -1,0 +1,73 @@
+<%- include('../partials/head', { title: title }) %>
+
+<main>
+  <h1><%= title %></h1>
+
+  <!-- Flash messages -->
+  <%- messages() %>
+
+  <!-- ✅ Account Update Form -->
+  <section>
+    <h2>Update Account Information</h2>
+    <form action="/account/update-info" method="post" class="account-form">
+
+      <label for="account_firstname">First Name:</label>
+      <input
+        type="text"
+        id="account_firstname"
+        name="account_firstname"
+        value="<%= account_firstname %>"
+        required
+      >
+
+      <label for="account_lastname">Last Name:</label>
+      <input
+        type="text"
+        id="account_lastname"
+        name="account_lastname"
+        value="<%= account_lastname %>"
+        required
+      >
+
+      <label for="account_email">Email:</label>
+      <input
+        type="email"
+        id="account_email"
+        name="account_email"
+        value="<%= account_email %>"
+        required
+      >
+
+      <!-- Hidden field -->
+      <input type="hidden" name="account_id" value="<%= account_id %>">
+
+      <button type="submit">Update Account</button>
+    </form>
+  </section>
+
+  <!-- ✅ Change Password Form -->
+  <section>
+    <h2>Change Password</h2>
+    <p>Your new password must be at least 8 characters and include 1 uppercase letter, 1 number, and 1 special character.</p>
+
+    <form action="/account/update-password" method="post" class="account-form">
+
+      <label for="account_password">New Password:</label>
+      <input
+        type="password"
+        id="account_password"
+        name="account_password"
+        required
+        pattern="^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,}$"
+        title="At least 8 characters, including 1 uppercase letter, 1 number, and 1 special character."
+      >
+
+      <!-- Hidden field -->
+      <input type="hidden" name="account_id" value="<%= account_id %>">
+
+      <button type="submit">Change Password</button>
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

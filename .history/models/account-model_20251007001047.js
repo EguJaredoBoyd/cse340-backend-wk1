@@ -88,35 +88,5 @@ async function updatePassword(password, id) {
   }
 }
 
-/* Get account by ID (needed to prefill update form) */
-async function getAccountById(account_id) {
-  try {
-    const result = await pool.query(
-      "SELECT * FROM account WHERE account_id = $1",
-      [account_id]
-    )
-    return result.rows[0]
-  } catch (error) {
-    console.error("getAccountById error: " + error)
-  }
-}
 
-/* Update account password (hashed) */
-async function updateAccountPassword(hashedPassword, account_id) {
-  try {
-    const sql = `
-      UPDATE account
-      SET account_password = $1
-      WHERE account_id = $2
-      RETURNING *;
-    `
-    const result = await pool.query(sql, [hashedPassword, account_id])
-    return result.rows[0]
-  } catch (error) {
-    console.error("updateAccountPassword error: " + error)
-  }
-}
-
-
-
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccountInfo, updatePassword, getAccountById, updateAccountPassword }
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccountInfo, updatePassword }

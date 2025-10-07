@@ -209,42 +209,6 @@ async function updatePassword(req, res, next) {
   }
 }
 
-/* Process Account Update */
-async function updateAccount(req, res, next) {
-  try {
-    const { account_firstname, account_lastname, account_email, account_id } = req.body
-    const result = await accountModel.updateAccountInfo(account_firstname, account_lastname, account_email, account_id)
-
-    if (result) {
-      req.flash("notice", "Account information updated successfully.")
-      return res.redirect("/account/management")
-    } else {
-      req.flash("notice", "Account update failed. Please try again.")
-      res.redirect(`/account/update/${account_id}`)
-    }
-  } catch (error) {
-    next(error)
-  }
-}
-
-/* ****************************************
-*  Logout Process
-* *************************************** */
-async function logout(req, res) {
-  try {
-    // Clear the JWT cookie
-    res.clearCookie("jwt", { httpOnly: true, secure: true, sameSite: "strict" })
-
-    req.flash("notice", "You have successfully logged out.")
-    return res.redirect("/")
-  } catch (error) {
-    console.error("Logout error:", error)
-    req.flash("notice", "Error logging out. Please try again.")
-    return res.redirect("/account")
-  }
-}
 
 
-
-
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdateAccount, updateAccountInfo, updatePassword, updateAccount, logout }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildUpdateAccount, updateAccountInfo, updatePassword }
