@@ -5,11 +5,8 @@
 <p><a href="/inv/type/<%= classificationId %>">← Back to inventory</a></p>
 
 <form action="/wishlist/add" method="POST">
-  <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+  <input type="hidden" name="inv_id" value="<%= inventory.inv_id %>">
   <button type="submit">Add to Wishlist</button>
 </form>
-
-<p>Vehicle ID: <%= vehicle.inv_id %></p>
-
 
 
